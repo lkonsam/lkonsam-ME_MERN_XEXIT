@@ -21,7 +21,7 @@ export const loginApi = async (username, password) => {
       username,
       password,
     });
-    // console.log(response);
+    console.log(response);
     return response.data;
   } catch (error) {
     console.error("Login API Error:", error.response?.data || error.message);
