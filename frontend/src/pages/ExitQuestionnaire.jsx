@@ -2,8 +2,14 @@ import { useState } from "react";
 import { submitQuestionnaireApi } from "../services";
 
 const defaultQuestions = [
-  { questionText: "Why are you leaving?", response: "" },
-  { questionText: "What can be improved?", response: "" },
+  {
+    questionText: "What prompted you to start looking for another job?",
+    response: "",
+  },
+  {
+    questionText: "Would you recommend this company to others?",
+    response: "",
+  },
 ];
 
 // Create fresh copy
