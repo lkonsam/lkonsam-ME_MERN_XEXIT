@@ -1,16 +1,19 @@
-import { useState } from 'react';
-import { submitQuestionnaireApi } from '../services';
+import { useState } from "react";
+import { submitQuestionnaireApi } from "../services";
+const defaultQuestions = [
+  { questionText: "Why are you leaving?", response: "" },
+  { questionText: "What can be improved?", response: "" },
+];
 
 export default function ExitQuestionnaire() {
-  const [questionnaire, setQuestionnaire] = useState([
-    { "questionText": "Why are you leaving?", "response": "" },
-    { "questionText": "What can be improved?", "response": "" }
-  ]);
+  const [questionnaire, setQuestionnaire] = useState(defaultQuestions);
 
   const handleSubmit = async () => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     await submitQuestionnaireApi(token, questionnaire);
-    alert('Responses submitted');
+    // Reset questionnaire after submission
+    setQuestionnaire(defaultQuestions);
+    alert("Responses submitted");
   };
 
   const handleChange = (index, value) => {
@@ -27,12 +30,17 @@ export default function ExitQuestionnaire() {
           <input
             type="text"
             value={q.response}
-            onChange={e => handleChange(i, e.target.value)}
+            onChange={(e) => handleChange(i, e.target.value)}
             className="w-full border p-2"
           />
         </div>
       ))}
-      <button onClick={handleSubmit} className="bg-purple-500 text-white px-4 py-2">Submit</button>
+      <button
+        onClick={handleSubmit}
+        className="bg-purple-500 text-white px-4 py-2"
+      >
+        Submit
+      </button>
     </div>
   );
 }
