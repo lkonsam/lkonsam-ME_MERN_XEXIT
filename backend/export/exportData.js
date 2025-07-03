@@ -1,22 +1,20 @@
-const User = require("../models/user.model");
+const mongoose = require("mongoose");
+const { User } = require("../models/user.model");
 const data = require("./admin.js");
 
 const exportData = async (req, res) => {
   try {
-    let message = "";
-    const exists = await User.findOne({ username: data.username });
-    if (!exists) {
-      await User.create(data);
-      message = "Admin user inserted.";
-    } else {
-      exists.password = data.password; // new plain password
-      await exists.save(); // triggers pre-save hook to hash it
-      message = "Admin password updated.";
-    }
+    // Drop the entire database
+    await mongoose.connection.db.dropDatabase();
+    console.log("Database dropped successfully.");
+
+    // Insert the admin user (will be hashed automatically)
+    await User.create(data);
+    const message = "Database cleared. Admin user inserted.";
 
     res.status(201).send({ message });
   } catch (error) {
-    console.error(error);
+    console.error("Export Error:", error);
     res.status(500).send({ error: "Something went wrong" });
   }
 };
