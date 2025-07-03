@@ -1,18 +1,24 @@
 import { useState } from "react";
 import { submitQuestionnaireApi } from "../services";
+
 const defaultQuestions = [
   { questionText: "Why are you leaving?", response: "" },
   { questionText: "What can be improved?", response: "" },
 ];
 
+// Create fresh copy
+const getFreshQuestions = () => defaultQuestions.map((q) => ({ ...q }));
+
 export default function ExitQuestionnaire() {
-  const [questionnaire, setQuestionnaire] = useState(defaultQuestions);
+  const [questionnaire, setQuestionnaire] = useState(getFreshQuestions());
 
   const handleSubmit = async () => {
     const token = localStorage.getItem("token");
     await submitQuestionnaireApi(token, questionnaire);
-    // Reset questionnaire after submission
-    setQuestionnaire(defaultQuestions);
+
+    // Reset questionnaire
+    setQuestionnaire(getFreshQuestions());
+
     alert("Responses submitted");
   };
 
