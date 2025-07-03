@@ -21,7 +21,7 @@ export const loginApi = async (username, password) => {
       username,
       password,
     });
-    console.log(response);
+    // console.log(response);
     return response.data;
   } catch (error) {
     console.error("Login API Error:", error.response?.data || error.message);
@@ -35,7 +35,7 @@ export const submitResignationApi = async (token, lwd) => {
       `${API_URL}/user/resign`,
       { lwd },
       {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { Authorization: `${token}` },
       }
     );
     return response.data;
@@ -54,7 +54,7 @@ export const submitQuestionnaireApi = async (token, responseList) => {
       `${API_URL}/user/responses`,
       { responses: responseList },
       {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { Authorization: `${token}` },
       }
     );
     return response.data;
