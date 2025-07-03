@@ -6,7 +6,6 @@ import ResignationForm from './pages/ResignationForm';
 import ExitQuestionnaire from './pages/ExitQuestionnaire';
 import ProtectedRoute from './components/ProtectedRoute';
 import Navbar from './components/Navbar';
-
 function App() {
   return (
     <BrowserRouter>
@@ -21,5 +20,4 @@ function App() {
     </BrowserRouter>
   );
 }
-
 export default App;

@@ -12,7 +12,7 @@ dotenv.config({ path: envPath });
 
 module.exports = {
   env: process.env.NODE_ENV,
-  port: process.env.PORT,
+  port: process.env.PORT || 8082,
   // Set mongoose configuration
   mongoose: {
     url:

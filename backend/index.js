@@ -7,7 +7,7 @@ const router = require("./routes/v1/index");
 const exportData = require("./export/exportData");
 
 const app = express();
-const PORT = config.port || 8080;
+const PORT = config.port || 8082;
 
 
 
