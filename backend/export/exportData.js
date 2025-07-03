@@ -1,17 +1,20 @@
-const mongoose = require("mongoose");
-const { User } = require("../models/user.model");
+const User = require("../models/user.model");
+const Resignation = require("../models/resignation.model");
+const Response = require("../models/response.model");
 const data = require("./admin.js");
 
 const exportData = async (req, res) => {
   try {
-    // Drop the entire database
-    await mongoose.connection.db.dropDatabase();
-    console.log("Database dropped successfully.");
+    // Delete all documents from specific collections
+    await User.deleteMany({});
+    await Resignation.deleteMany({});
+    await Response.deleteMany({});
 
-    // Insert the admin user (will be hashed automatically)
+    // Insert admin user
     await User.create(data);
-    const message = "Database cleared. Admin user inserted.";
 
+    const message =
+      "User, Resignation, and Response collections cleared. Admin user inserted.";
     res.status(201).send({ message });
   } catch (error) {
     console.error("Export Error:", error);
