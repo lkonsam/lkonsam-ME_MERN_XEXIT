@@ -66,3 +66,55 @@ export const submitQuestionnaireApi = async (token, responseList) => {
     throw error;
   }
 };
+
+export const allResign = async (token) => {
+  try {
+    const response = await axios.get(`${API_URL}/admin/resignations`, {
+      headers: { Authorization: `${token}` },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error:", error.response?.data || error.message);
+    throw error;
+  }
+};
+
+export const allResponse = async (token) => {
+  try {
+    const response = await axios.get(`${API_URL}/admin/exit_responses`, {
+      headers: { Authorization: `${token}` },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error:", error.response?.data || error.message);
+    throw error;
+  }
+};
+
+export const conclude_resignation = async (
+  token,
+  resignationId,
+  approved,
+  lwd
+) => {
+  try {
+    const response = await axios.put(
+      `${API_URL}/admin/conclude_resignation`,
+      {
+        resignationId,
+        approved,
+        lwd,
+      },
+      {
+        headers: { Authorization: `${token}` },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error(
+      "Conclude Resignation API Error:",
+      error.response?.data || error.message
+    );
+    throw error;
+  }
+};

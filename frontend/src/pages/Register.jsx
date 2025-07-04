@@ -6,9 +6,13 @@ export default function Register() {
   const [password, setPassword] = useState("");
 
   const handleRegister = async () => {
-    await registerApi(username, password);
-    alert("Registration successful");
-    window.location.href = "/";
+    try {
+      await registerApi(username, password);
+      alert("Registration successful");
+      window.location.href = "/";
+    } catch (error) {
+      alert("Registration failed", error.message || "Please try again");
+    }
   };
 
   return (

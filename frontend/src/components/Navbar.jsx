@@ -1,12 +1,12 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Navbar() {
   const navigate = useNavigate();
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    navigate('/');
+    localStorage.removeItem("token");
+    navigate("/");
   };
 
   return (
@@ -15,15 +15,33 @@ export default function Navbar() {
       <div className="space-x-4">
         {!token ? (
           <>
-            <Link to="/" className="hover:underline">Login</Link>
-            <Link to="/register" className="hover:underline">Register</Link>
+            <Link to="/" className="hover:underline">
+              Login
+            </Link>
+            <Link to="/register" className="hover:underline">
+              Register
+            </Link>
           </>
         ) : (
           <>
-            <Link to="/dashboard" className="hover:underline">Dashboard</Link>
-            <Link to="/resignation" className="hover:underline">Resignation</Link>
-            <Link to="/questionnaire" className="hover:underline">Questionnaire</Link>
-            <button onClick={handleLogout} className="ml-2 underline">Logout</button>
+            <Link to="/dashboard" className="hover:underline">
+              Dashboard
+            </Link>
+            <Link to="/resignation" className="hover:underline">
+              Resignation
+            </Link>
+            <Link to="/questionnaire" className="hover:underline">
+              Questionnaire
+            </Link>
+            <Link to="/getresign" className="hover:underline">
+              All Resignation
+            </Link>
+            <Link to="/getrespone" className="hover:underline">
+              All Responses
+            </Link>
+            <button onClick={handleLogout} className="ml-2 underline">
+              Logout
+            </button>
           </>
         )}
       </div>

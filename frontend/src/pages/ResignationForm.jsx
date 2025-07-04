@@ -5,11 +5,18 @@ export default function ResignationForm() {
   const [lwd, setLwd] = useState("");
 
   const handleSubmit = async () => {
-    const token = localStorage.getItem("token");
-    await submitResignationApi(token, lwd);
-    // Reset the lwd after submission
-    setLwd("");
-    alert("Resignation submitted");
+    try {
+      const token = localStorage.getItem("token");
+      await submitResignationApi(token, lwd);
+      // Reset the lwd after submission
+      setLwd("");
+      alert("Resignation submitted");
+    } catch (error) {
+      alert(
+        "Failed to submit resignation",
+        error.message || "Please try again"
+      );
+    }
   };
 
   return (

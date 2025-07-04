@@ -19,13 +19,18 @@ export default function ExitQuestionnaire() {
   const [questionnaire, setQuestionnaire] = useState(getFreshQuestions());
 
   const handleSubmit = async () => {
-    const token = localStorage.getItem("token");
-    await submitQuestionnaireApi(token, questionnaire);
-
-    // Reset questionnaire
-    setQuestionnaire(getFreshQuestions());
-
-    alert("Responses submitted");
+    try {
+      const token = localStorage.getItem("token");
+      await submitQuestionnaireApi(token, questionnaire);
+      // Reset questionnaire
+      setQuestionnaire(getFreshQuestions());
+      alert("Responses submitted");
+    } catch (error) {
+      alert(
+        "Failed to submit Exit Questionnaire",
+        error.message || "Please try again"
+      );
+    }
   };
 
   const handleChange = (index, value) => {
